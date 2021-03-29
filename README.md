@@ -18,4 +18,25 @@
   
   또한 여러 중복 코드 역시 `FrontController`에서   
   처리해 코드의 재활용성을 높히고, 유연성을 높힐 것이다.    
-***
+***       
+* mvc verson 1    
+(![mvc verson 1](https://user-images.githubusercontent.com/60066223/112804428-60a47800-90af-11eb-86f1-88f11723baa6.PNG))          
+
+
+
+
+* 위 사진을 보면서 흐름을 설명해보겠다.    
+  * 일단 클라이언트로부터 요청이 들어오면    
+    어떤 요청이든 `FrontController`로 들어오게    
+    되어있다. `FrontController`만 서블릿 객체로    
+    생성해 컨테이너가 관리하기 때문.    
+    
+  * `FrontController`에서 `Map`을 이용해 각 `Controller`들의     
+    호출 `Url`을 가지고 키로 가지고 있고, 각 `Url`에 맞는    
+    `Controller` 객체를 값으로 가지고 있다.    
+    
+  * 해서 요청이 들어오면 `request.getRequestUrl()`을 통해       
+    해당 요청 `Url`과 맵핑되는 `Controller`를 찾고,      
+    해당 `Controller`를 상위 인터페이스인 `ControllerV1` 타입으로    
+    받은 뒤 모든 하위 `Controller` 클래스가 재정의 하고 구현한    
+    `process()`를 호출하면서 각각의 로직을 수행하게 된다.    
