@@ -56,4 +56,45 @@
     점진적으로 작은 것 부터 하나하나 해가면서    
     테스트 후 아무 이상 없으면 또 진행하고, 이런식으로     
     점진적으로 해 나가야 한다.      
+***      
+* mvc verson 2        
+![mvc verson 2](https://user-images.githubusercontent.com/60066223/112916839-51b7d700-913c-11eb-8932-6dee08b37862.PNG)    
+
+
+
+
+* 이번 버전의 목표는 view에 대한      
+  코드 중복을 걷어내는 것이 목표였다.    
+  
+* 모든 Controller에      
+  ``` java
+  String viewPath = "/WEB-INF/views/new-form.jsp";     
+  RequestDispatcher dispatcher = request.getRequestDispatcher(viewPath);     
+  dispatcher.forward(request, response);
+  ```
+  위 같은 소스가 중복 된다는 것이었다.    
+  
+* 이를 분리하기 위해서 `MyView` 라는 클래스를 추가했다.    
+
+* 이 `MyView` 클래스는 각 `Controller`에서 상대경로를     
+  생성자 매개변수로 받아 초기화 한 뒤      
+  `reader()`를 이용해 `jsp`로 포워딩을   
+  수행하게 된다. 어쨋든 공통된 작업이기 때문에   
+  `FrontController`에서 한 번에 처리 가능했다.    
+  
+* 그 외 변화는 각 `Controller`에서 `MyView` 객체를 생성해    
+  반환하는 것이 변화이다.   
+  이유는 결국 `jsp`를 호출하기 위해서이고, `MyView`를    
+  `FrontController`에 반환하게 되면서 중복됬던 `jsp`  
+  포워딩 작업을 `FrontController`에서 한 번에     
+  처리하게 되었다.      
+  
+* 이 역시 인터페이스를 이용한 다형성으로 구현이 되었다.    
+  각 컨트롤러는 `ControllerV2` 인터페이스를 구현하고,     
+  해당 메서드는 `MyView`를 반환하게 되어 있다.     
+  그리고 이를 구현한 하위 메서드들에서 각자 자기 역할에 맞게    
+  내부 구현을 다르게 진행한다.    
+  그리고 컴파일 시점이 아닌 런타임 시점에 유동적으로   
+  어떤 `Controller`가 선택될 지 결정되고, 메서드 역시    
+  해당 `Controller`의 메서드가 실행된다.
 *** 
