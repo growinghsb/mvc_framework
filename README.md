@@ -172,4 +172,53 @@
   그렇기 때문에 점진적으로 조금씩 발전시켜 나가는 것을       
   당연히 여기고, 작은거라도 일단 단단하게 하나씩 만들어 가자.      
 ***
+* mvc verson 5      
+![mvc verson 5](https://user-images.githubusercontent.com/60066223/112945112-cefc3f80-916e-11eb-8207-9b6ce31dc3d8.PNG)         
 
+
+
+
+* 일단 놀랍다.. Adapter 패턴을 적용했는데 너무 아름답다.             
+  정리하고, 여기에 더 추가해서 인터페이스로 바꿀 수 있는 것들은         
+  한 번 바꿔보자.       
+  [어댑터 패턴 정리](https://github.com/growinghsb/til_blog/blob/main/March/30-1.md)        
+
+* verson 4 까지는 하나의 `Controller` 타입만 사용할 수 있었다.   
+  이유는 각 `Controller` 마다 반환 타입이 서로 다르기 때문에   
+  인터페이스를 공유하지 못했다.    
+  
+* 하지만 `Adapter` 패턴을 사용해 각 `Controller`를 하나로 통일할 수    
+  있게 되었다. `Adapter`를 각 `Controller`마다 만들고    
+  `FrontController`에서는 `Adapter`를 통해 `Controller`의   
+  로직을 수행하고, 반환 타입으로 동일한 타입의 객체를   
+  반환 받는다. 
+  
+* 이게 가능한 이유는 `Controller`들의 반환 타입은 다르지만   
+  각 `Controller`에 붙은 `Adapter`들의 반환타입은 같고,    
+  `FrontController`는 `Adapter`를 통해 `Controller`의 로직을      
+  수행하기 때문이다.    
+  
+* 이로써 v3, v4 `Controller`를 모두 요청에 따라     
+  자유롭게 사용할 수 있게 되었다.    
+  
+* 어쨋든 `Controller`는 동일한 작업을 수행한다.    
+  하지만 수행하는 방법이 각자 달랐고,   
+  `FrontController`가 직접 `Controller`를 호출 했을 땐     
+  이러한 부분 때문에 v3 전용, v4 전용 `FrontController`가    
+  필요했다.    
+  
+* 하지만 `FrontController`가 `Adapter`라는 추상화에 의존하고,    
+  각 `Adapter`는 `FrontController`에 일관된 구현을 보장 함으로써    
+  서로 구현이 다른 `Controller`임에도 불구하고,    
+  요청에 따라 자유롭게 사용 가능하다.    
+  
+* 또한 여기서 중요한 것은 `Controller`가 추가되고,     
+  `Adapter`가 추가되도, `FrontController`는    
+  바뀌지 않는다는 것이다.     
+  
+* 그 이유는 간단하다. `FrontController`가    
+  `Adapter`라는 추상화에 의존하고 있기 때문이다.    
+  
+* `Adapter`는 각 `Controller`에 붙어 `FrontController`와    
+  `Controller` 사이에서 규격을 통일 함으로써(반환타입)     
+  역할을 다하고 있다.    
