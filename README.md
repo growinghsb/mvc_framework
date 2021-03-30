@@ -97,4 +97,47 @@
   그리고 컴파일 시점이 아닌 런타임 시점에 유동적으로   
   어떤 `Controller`가 선택될 지 결정되고, 메서드 역시    
   해당 `Controller`의 메서드가 실행된다.
-*** 
+***     
+* mvc verson 3      
+![mvc verson 3](https://user-images.githubusercontent.com/60066223/112926111-ed057800-914d-11eb-8cf1-e7c6e6deede1.PNG)      
+
+
+
+
+* 이번 리팩토링의 주 목적은 각 `Controller`들의    
+  `Servlet` 종속성을 제거 하는 것이었다.   
+  
+* verson 1, verson2 를 거치면서 더이상 `Controller`들에서는    
+  서블릿에서 생성한 `request와 response` 객체를 사용하지   
+  않도록 구현이 되어 있었기 때문이다.       
+  
+* 해서 `request`를 사용했던 `Controller`에는     
+  미리 필요한 데이터를 `FrontController`에서 작업해     
+  `Map` 객체를 넘겨 줌으로써 필요를 대체하고자 한다.    
+  
+* 그리고 `ViewResolver`를 따로 둬 `Controller`에서 반환하는      
+  `View`의 상대경로를 받아 절대경로를 만드는 메서드를 만들어     
+  추후에 절대경로가 변경이 생겨도 `ViewResolver`만 변경할 수 있도록    
+  진행하고자 한다.    
+  
+* 그래서 `ModelView` 객체를 만들어 데이터와 `View`를     
+  한 번에 전달할 수 있도록 한다.    
+  
+* 일단 인터페이스 설계를 통해 구현 `Controller`에서     
+  `ModelView` 객체를 반환하도록 한다. 매개변수로는     
+  `Map` 객체를 받아 데이터를 꺼내 사용할 수 있도록 하고,     
+  데이터를 담아 반환해야 할 `Controller`가 `ModelView`객체를    
+  통해 데이터를 옮길 수 있도록 반환타입을 `ModelView`로 한다.     
+  
+* 이렇게 되면 `FrontController`는 요청에서 들어오는    
+  데이터를 `Map`에 담아 필요한 `Controller`에 넘겨 줄 수 있고,    
+  `Controller` 역시 `ModelView` 객체에 자신이 넘겨 줄   
+  `View` 상대경로와, 데이터를 담아 반환하면 된다.    
+  
+* 그 후 `ViewResolver`를 통해 절대경로를 반환받게 되고      
+  랜더링을 진행하는데 `jsp`에서 데이터를 사용하려면    
+  `setAttribute()` 작업을 진행해 줘야 한다.    
+  
+* 해서 랜더링 작업 시 `map`에 있는 데이터를 다 조회해     
+  `setAttribute()`에 넣고, `forword()` 하면 된다.    
+***
