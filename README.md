@@ -141,3 +141,35 @@
 * 해서 랜더링 작업 시 `map`에 있는 데이터를 다 조회해     
   `setAttribute()`에 넣고, `forword()` 하면 된다.    
 ***
+* mvc verson 4     
+![mvc verson 4](https://user-images.githubusercontent.com/60066223/112932711-5ccd3000-9159-11eb-9be8-732d4408e31b.PNG)            
+
+
+
+
+* 이번 리팩토링은 기존의 기능을 그대로 유지하면서         
+  `Controller`에서 `FrontController`에게 `ModelView 객체`가 아닌         
+  그냥 `View` 상대경로만, 즉 문자열만 리턴하게 바꿨다.             
+  
+* 이유는 어짜피 `ModelView 객체`에 상대경로만 담아서        
+  객체를 생성해 넘기기 때문에 데이터를 전달하는 `Model 객체(Map)`는                   
+  매개변수로 전달하고, 넣을 값이 있으면 `Model 객체(Map)`에                     
+  put() 해서 넣는다. 그렇게 되면 `call-by-reference`로          
+  객체의 참조값을 넘기기 때문에 (여기서는 Map)          
+  `FrontController`의 `Model 객체(Map)`에 데이터가 담긴다.            
+ 
+* 그리고 해당 `Controller`가 반환할 상대경로를 넘기면    
+  `FrontController`에서는 `ViewResolver`를 통해   
+  절대경로로 만들어 최종적으로 `MyView`에 넘기게 되고,   
+  이후 mvc verson 3과 동일한 과정을 거쳐     
+  jsp 로 `forword()` 된다.
+***
+* 여기까지 진행하면서 항상 점진적으로 발전시켜 가야 함을       
+  깨닫게 되었다. 가장 탄탄한 밑바닥에서 구조를 잡고,       
+  테스트 하고, 디테일을 덧붙여 가는 방식으로 만들어가야 한다.        
+  한 번에 완성품으로 갈 순 없다. 아니 애초에 완성이란          
+  존재하지 않는다. 변하지 않으면 도태되는 것이 소프트웨어다.         
+  그렇기 때문에 점진적으로 조금씩 발전시켜 나가는 것을       
+  당연히 여기고, 작은거라도 일단 단단하게 하나씩 만들어 가자.      
+***
+
