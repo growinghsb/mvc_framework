@@ -1,7 +1,5 @@
 package me.winfly.demo.web.frontcontroller.v1;
 
-import me.winfly.demo.domain.member.Member;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,9 +15,9 @@ public class FrontController extends HttpServlet {
     private Map<String, ControllerV1> controllerV1s = new HashMap<>();
 
     public FrontController() {
-        controllerV1s.put("/front-controller/v1/members/new-form", new MemberFormController());
-        controllerV1s.put("/front-controller/v1/members/save", new MemberSaveController());
-        controllerV1s.put("/front-controller/v1/members", new MemberListController());
+        controllerV1s.put("/front-controller/v1/members/new-form", new MemberFormControllerV1());
+        controllerV1s.put("/front-controller/v1/members/save", new MemberSaveControllerV1());
+        controllerV1s.put("/front-controller/v1/members", new MemberListControllerV1());
     }
 
     @Override

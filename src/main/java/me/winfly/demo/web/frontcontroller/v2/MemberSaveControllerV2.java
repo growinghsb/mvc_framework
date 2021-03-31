@@ -6,7 +6,7 @@ import me.winfly.demo.domain.member.MemberRepository;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class MemberSaveController implements ControllerV2 {
+public class MemberSaveControllerV2 implements ControllerV2 {
     @Override
     public MyView process(HttpServletRequest request, HttpServletResponse response) {
         String name = request.getParameter("username");
