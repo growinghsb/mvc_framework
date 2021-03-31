@@ -222,3 +222,9 @@
 * `Adapter`는 각 `Controller`에 붙어 `FrontController`와    
   `Controller` 사이에서 규격을 통일 함으로써(반환타입)     
   역할을 다하고 있다.    
+***    
+* 현재 V1 Controller도 Adapter를 만들어서     
+  FrontControllerV5에서 처리할 수 있도록 했다.     
+  이 역시 너무 간편하게 Adapter만 구현하면 가능했다.    
+  이렇게 추상화에만 의존하면 확장이 너무 편하게 가능하다.    
+  
