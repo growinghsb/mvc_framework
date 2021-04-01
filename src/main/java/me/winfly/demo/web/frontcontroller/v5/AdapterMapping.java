@@ -37,8 +37,7 @@ public class AdapterMapping {
         adapterMapping.put("/front-controller/v5/v4/members", new MemberListControllerV4());
     }
 
-    public Object getController(String requestUrl){
+    public Object getController(String requestUrl) {
         return adapterMapping.get(requestUrl);
     }
-
 }
