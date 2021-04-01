@@ -57,6 +57,7 @@ public class FrontControllerV5 extends HttpServlet {
 
     private void initAdapters() {
         adapters.add(new ControllerV1Adapter());
+        adapters.add(new ControllerV2Adapter());
         adapters.add(new ControllerV3Adapter());
         adapters.add(new ControllerV4Adapter());
     }

@@ -14,6 +14,10 @@ public class MyView {
         this.viewPath = viewPath;
     }
 
+    public String getViewPath(){
+        return viewPath;
+    }
+
     public void render(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String jspViewPath = "/WEB-INF/views/" + viewPath + ".jsp";
         RequestDispatcher dispatcher = request.getRequestDispatcher(jspViewPath);
