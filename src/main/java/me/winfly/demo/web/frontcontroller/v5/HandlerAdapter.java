@@ -1,5 +1,7 @@
 package me.winfly.demo.web.frontcontroller.v5;
 
+import me.winfly.demo.web.frontcontroller.v5.controller.ControllerAnnotationAdapter;
+
 import java.util.ArrayList;
 
 public class HandlerAdapter {
@@ -10,6 +12,7 @@ public class HandlerAdapter {
         adapters.add(new ControllerV1Adapter());
         adapters.add(new ControllerV3Adapter());
         adapters.add(new ControllerV4Adapter());
+        adapters.add(new ControllerAnnotationAdapter());
     }
     public MyHandlerAdapter getAdapter(Object controller) {
         for (MyHandlerAdapter adapter : adapters) {

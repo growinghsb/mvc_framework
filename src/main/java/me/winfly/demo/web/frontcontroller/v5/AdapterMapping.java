@@ -12,6 +12,7 @@ import me.winfly.demo.web.frontcontroller.v3.MemberSaveControllerV3;
 import me.winfly.demo.web.frontcontroller.v4.MemberFormControllerV4;
 import me.winfly.demo.web.frontcontroller.v4.MemberListControllerV4;
 import me.winfly.demo.web.frontcontroller.v4.MemberSaveControllerV4;
+import me.winfly.demo.web.frontcontroller.v5.controller.MemberController;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,9 +36,13 @@ public class AdapterMapping {
         adapterMapping.put("/front-controller/v5/v4/members/new-form", new MemberFormControllerV4());
         adapterMapping.put("/front-controller/v5/v4/members/save", new MemberSaveControllerV4());
         adapterMapping.put("/front-controller/v5/v4/members", new MemberListControllerV4());
+
+        adapterMapping.put("/front-controller/v5/members/new-form", new MemberController());
+        adapterMapping.put("/front-controller/v5/members/save", new MemberController());
+        adapterMapping.put("/front-controller/v5/members", new MemberController());
     }
 
     public Object getController(String requestUrl) {
-        return adapterMapping.get(requestUrl);
+            return adapterMapping.get(requestUrl);
     }
 }
