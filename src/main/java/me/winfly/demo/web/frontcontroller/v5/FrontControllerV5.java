@@ -29,30 +29,12 @@ import java.util.Map;
 @WebServlet(name = "frontControllerV5", urlPatterns = "/front-controller/v5/*")
 public class FrontControllerV5 extends HttpServlet {
 
-    private Map<String, Object> adapterMapping = new HashMap<>();
     private List<MyHandlerAdapter> adapters = new ArrayList<>();
+    private AdapterMapping adapterMapping;
 
     public FrontControllerV5() {
-        initAdapterMappings();
+        adapterMapping = new AdapterMapping();
         initAdapters();
-    }
-
-    private void initAdapterMappings() {
-        adapterMapping.put("/front-controller/v5/v1/members/new-form", new MemberFormControllerV1());
-        adapterMapping.put("/front-controller/v5/v1/members/save", new MemberSaveControllerV1());
-        adapterMapping.put("/front-controller/v5/v1/members", new MemberListControllerV1());
-
-        adapterMapping.put("/front-controller/v5/v2/members/new-form", new MemberFormControllerV2());
-        adapterMapping.put("/front-controller/v5/v2/members/save", new MemberSaveControllerV2());
-        adapterMapping.put("/front-controller/v5/v2/members", new MemberListControllerV2());
-
-        adapterMapping.put("/front-controller/v5/v3/members/new-form", new MemberFormControllerV3());
-        adapterMapping.put("/front-controller/v5/v3/members/save", new MemberSaveControllerV3());
-        adapterMapping.put("/front-controller/v5/v3/members", new MemberListControllerV3());
-
-        adapterMapping.put("/front-controller/v5/v4/members/new-form", new MemberFormControllerV4());
-        adapterMapping.put("/front-controller/v5/v4/members/save", new MemberSaveControllerV4());
-        adapterMapping.put("/front-controller/v5/v4/members", new MemberListControllerV4());
     }
 
     private void initAdapters() {
@@ -79,7 +61,7 @@ public class FrontControllerV5 extends HttpServlet {
     }
 
     private Object getController(HttpServletRequest request) {
-        return adapterMapping.get(request.getRequestURI());
+        return adapterMapping.getController(request.getRequestURI());
     }
 
     private MyHandlerAdapter getAdapter(Object controller) {
