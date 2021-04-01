@@ -226,5 +226,22 @@
 * 현재 V1 Controller도 Adapter를 만들어서     
   FrontControllerV5에서 처리할 수 있도록 했다.     
   이 역시 너무 간편하게 Adapter만 구현하면 가능했다.    
-  이렇게 추상화에만 의존하면 확장이 너무 편하게 가능하다.    
+  이렇게 추상화에만 의존하면 확장이 너무 편하게 가능하다.        
   
+* V2 Controller 역시 Adapter만 만들면    
+  바로 확장이 가능했다. 이제 AdapterMapping을     
+  정리해 봐야겠다. 현재 FrontController에 이렇게 되어있다.    
+  ![FrontController init](https://user-images.githubusercontent.com/60066223/113225751-578ef300-92c9-11eb-8364-6aa4b3978f0f.PNG)      
+  
+  
+  
+  
+* 이건 어떻게 정리하는게 좋을까? 일단 url이 들어오면    
+  해당 url에 맞는 Controller를 찾아서 반환하는 것이다.     
+  어노테이션 방식이면 각 컨트롤러마다 객체를 생성할   
+  필요 없이 컨트롤러 객체 하나에 메소드 단위로      
+  맵핑이 가능한데 이 방식은 인터페이스를 각각 만들어서    
+  구현한거라 어쩔 수 없다. 이게 어떻게 구현되어 있는지    
+  스프링을 뜯어 봐야겠다.
+  
+
